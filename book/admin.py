@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Book
+from .models import Books
 
 
-class BookAdmin(admin.ModelAdmin):
+class BooksAdmin(admin.ModelAdmin):
     """Админ панель управления книгами """
 
     list_display = ('title', 'author', 'description', 'genre')
@@ -11,4 +11,4 @@ class BookAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.register(Book, BookAdmin)
+admin.site.register(Books, BooksAdmin)

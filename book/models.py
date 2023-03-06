@@ -3,7 +3,7 @@ from django.db import models
 
 # Добавить в будущем реализацию фотографии книги(с двух сторон),
 # нахождение ее у конкретного клиента библиотеки
-class Book(models.Model):
+class Books(models.Model):
     """ Модель книги. """
 
     title = models.CharField(
@@ -25,5 +25,6 @@ class Book(models.Model):
         max_length=50,
     )
 
-    def __str__(self):
-        return self.name
+    class Meta():
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
