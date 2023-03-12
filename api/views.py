@@ -1,16 +1,27 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
 from rest_framework import permissions, viewsets
+from rest_framework.response import Response
 
-from book.models import Books
+from book.models import Books, BooksRent, Readers
 
-from .serializers import BooksSerializers, UserSerializer
+from .serializers import (BooksSerializers, ReaderReputationSerializer,
+                          UserSerializer)
 
 User = get_user_model()
 
 
+class UserViewSet(UserViewSet):
+    """" Представление Пользователя. """
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 class BooksViewSet(viewsets.ModelViewSet):
     """ Представление Книг."""
+
     queryset = Books.objects.all()
     serializer_class = BooksSerializers
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -27,7 +38,24 @@ class BooksViewSet(viewsets.ModelViewSet):
         return super(BooksViewSet, self).get_permissions()
 
 
-class UserViewSet(UserViewSet):
-    """" Представление Пользователя. """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class RentLateReturnView(viewsets.ModelViewSet):
+    """ Аренда/Возврат книги. """
+    permission_classes = (permissions.IsAdminUser,)
+
+    def patch(self, request, rent_id):
+        rent = get_object_or_404(BooksRent, id=rent_id)
+        if rent.is_late:
+            rent.reader.reputation.score -= 1
+            rent.reader.reputation.save()
+        else:
+            rent.reader.reputation.score += 1
+            rent.reader.reputation.save()
+        return Response({'success': True})
+
+
+class ReaderListView(viewsets.ModelViewSet):
+    """"Представление Читателей. """
+    permission_classes = (permissions.IsAdminUser,)
+
+    queryset = Readers.objects.all()
+    serializer_class = ReaderReputationSerializer

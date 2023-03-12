@@ -1,8 +1,42 @@
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
+from django.utils import timezone
+from phonenumber_field.modelfields import PhoneNumberField
 
 
-# Добавить в будущем реализацию фотографии книги(с двух сторон),
-# нахождение ее у конкретного клиента библиотеки
+class Readers(models.Model):
+    """ Модель читателя. Посетителя библиотеки. """
+
+    username = models.CharField(
+        verbose_name='Username',
+        max_length=100,
+        unique=True,
+        validators=(UnicodeUsernameValidator(), )
+    )
+    first_name = models.CharField(
+        verbose_name='Имя читателя',
+        max_length=50)
+    last_name = models.CharField(
+        verbose_name='Фамилия читателя',
+        max_length=50)
+    email = models.EmailField(
+        verbose_name='email читателя'
+    )
+    phone_number = PhoneNumberField(
+        unique=True,
+        null=False,
+        blank=False
+    )
+
+    class Meta:
+        ordering = ('username', )
+        verbose_name = 'Читатель'
+        verbose_name_plural = 'Читатели'
+
+    def __str__(self):
+        return self.username
+
+
 class Books(models.Model):
     """ Модель книги. """
 
@@ -24,7 +58,72 @@ class Books(models.Model):
         verbose_name='Жанр книги',
         max_length=50,
     )
+    rented_by = models.ForeignKey(
+        Readers,
+        verbose_name='На руках у ...',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='rented_books'
+    )
 
     class Meta():
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
+
+    def __str__(self):
+        return self.title
+
+
+class BooksRent(models.Model):
+    """ Модель выдачи книг. """
+
+    book = models.ForeignKey(
+        Books,
+        verbose_name='Книга',
+        on_delete=models.CASCADE
+    )
+    reader = models.ForeignKey(
+        Readers,
+        verbose_name='Читатель',
+        on_delete=models.CASCADE
+    )
+    rented_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата выдачи книги',
+    )
+    returned_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='Дата возврата книги',
+    )
+
+    def __str__(self):
+        return f"{self.reader.username} > {self.book.title}"
+
+    @property
+    def is_late(self):
+        """ Проверка возвращена ли книга вовремя(14 дней с момента выдачи). """
+
+        if not self.return_date:
+            return False
+        return (
+            self.returned_date > self.rented_at + timezone.timedelta(days=14))
+
+
+class ReaderReputation(models.Model):
+    """ Модель репутации Читателя. """
+
+    reader = models.OneToOneField(
+        Readers,
+        on_delete=models.CASCADE,
+        related_name='reputation',
+        verbose_name='Репутация'
+    )
+    score = models.IntegerField(
+        default=0,
+        verbose_name='Ретинг Читателя'
+    )
+
+    def __str__(self):
+        return f"Репутация пользователя {self.reader.username}: ({self.score})"
