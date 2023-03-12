@@ -31,6 +31,7 @@ class BooksViewSet(viewsets.ModelViewSet):
         Переопределение метода get_permissions.
         Вставлять разрешения в зависимости от запроса
         """
+
         if self.request.method in ['POST', 'PUT', 'DELETE']:
             self.permission_classes = [permissions.IsAdminUser]
         else:
@@ -40,9 +41,12 @@ class BooksViewSet(viewsets.ModelViewSet):
 
 class RentLateReturnViewSet(viewsets.ModelViewSet):
     """ Аренда/Возврат книги. """
+
     permission_classes = (permissions.IsAdminUser,)
 
     def patch(self, request, rent_id):
+        """" Считаем репутацию Читателя. """
+
         rent = get_object_or_404(BooksRent, id=rent_id)
         if rent.is_late:
             rent.reader.reputation.score -= 1
