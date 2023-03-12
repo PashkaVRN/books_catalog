@@ -38,7 +38,7 @@ class BooksViewSet(viewsets.ModelViewSet):
         return super(BooksViewSet, self).get_permissions()
 
 
-class RentLateReturnView(viewsets.ModelViewSet):
+class RentLateReturnViewSet(viewsets.ModelViewSet):
     """ Аренда/Возврат книги. """
     permission_classes = (permissions.IsAdminUser,)
 
@@ -53,7 +53,7 @@ class RentLateReturnView(viewsets.ModelViewSet):
         return Response({'success': True})
 
 
-class ReaderListView(viewsets.ModelViewSet):
+class ReaderListViewSet(viewsets.ModelViewSet):
     """"Представление Читателей. """
     permission_classes = (permissions.IsAdminUser,)
 
