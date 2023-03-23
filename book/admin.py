@@ -4,7 +4,7 @@ from .models import Books
 
 
 class BooksAdmin(admin.ModelAdmin):
-    """Админ панель управления книгами """
+    """Админ панель управления книгами."""
 
     list_display = ('title', 'author', 'description', 'genre')
     search_fields = ('title', 'author', 'genre')

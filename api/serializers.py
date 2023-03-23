@@ -6,7 +6,7 @@ from book.models import Books, BooksRent, ReaderReputation
 
 
 class UserCreateSerializer(UserCreateSerializer):
-    """ Сериализатор создания пользователя. """
+    """Сериализатор создания пользователя."""
 
     class Meta:
         model = User
@@ -16,7 +16,7 @@ class UserCreateSerializer(UserCreateSerializer):
 
 
 class UserSerializer(UserSerializer):
-    """ Сериализатор пользователя. """
+    """Сериализатор пользователя."""
 
     class Meta:
         model = User
@@ -25,7 +25,7 @@ class UserSerializer(UserSerializer):
 
 
 class BooksRentSerializer(serializers.ModelSerializer):
-    """ Сериализатор аренды Книги. """
+    """Сериализатор аренды Книги."""
 
     class Meta:
         model = BooksRent
@@ -34,7 +34,7 @@ class BooksRentSerializer(serializers.ModelSerializer):
 
 
 class BooksSerializers(serializers.ModelSerializer):
-    """Сериализатор вывода Книг. """
+    """Сериализатор вывода Книг."""
 
     rents = BooksRentSerializer(many=True, read_only=True)
 
@@ -45,7 +45,7 @@ class BooksSerializers(serializers.ModelSerializer):
 
 
 class ReaderReputationSerializer(serializers.ModelSerializer):
-    """ Сериализатор репутации Читателя. """
+    """Сериализатор репутации Читателя."""
 
     reader = serializers.CharField(source='reader.username', read_only=True)
 
