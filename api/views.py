@@ -6,21 +6,21 @@ from rest_framework.response import Response
 
 from book.models import Books, BooksRent, Readers
 
-from .serializers import (BooksSerializers, ReaderReputationSerializer,
+from .serializers import (BooksSerializers, ReadersSerializer,
                           UserSerializer)
 
 User = get_user_model()
 
 
 class UserViewSet(UserViewSet):
-    """" Представление Пользователя. """
+    """"Представление Пользователя."""
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class BooksViewSet(viewsets.ModelViewSet):
-    """ Представление Книг."""
+    """Представление Книг."""
 
     queryset = Books.objects.all()
     serializer_class = BooksSerializers
@@ -28,8 +28,8 @@ class BooksViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """
-        Переопределение метода get_permissions.
-        Вставлять разрешения в зависимости от запроса
+        Переопределение метода get_permissions,
+        Вставлять разрешения в зависимости от запроса.
         """
 
         if self.request.method in ['POST', 'PUT', 'DELETE']:
@@ -40,12 +40,12 @@ class BooksViewSet(viewsets.ModelViewSet):
 
 
 class RentLateReturnViewSet(viewsets.ModelViewSet):
-    """ Аренда/Возврат книги. """
+    """Аренда/Возврат книги."""
 
     permission_classes = (permissions.IsAdminUser,)
 
     def patch(self, request, rent_id):
-        """" Считаем репутацию Читателя. """
+        """"Считаем репутацию Читателя."""
 
         rent = get_object_or_404(BooksRent, id=rent_id)
         if rent.is_late:
@@ -58,8 +58,8 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
 
 
 class ReaderListViewSet(viewsets.ModelViewSet):
-    """"Представление Читателей. """
-    permission_classes = (permissions.IsAdminUser,)
+    """"Представление Читателей."""
 
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Readers.objects.all()
-    serializer_class = ReaderReputationSerializer
+    serializer_class = ReadersSerializer
