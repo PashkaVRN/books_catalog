@@ -2,3 +2,4 @@ Django==3.2.16
 djangorestframework==3.12.4
 django-phonenumber-field==7.0.2
 djoser==2.1.0
+phonenumbers==8.13.7

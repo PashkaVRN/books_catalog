@@ -28,7 +28,7 @@ class BooksViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """
-        Переопределение метода get_permissions.
+        Переопределение метода get_permissions,
         Вставлять разрешения в зависимости от запроса.
         """
 
@@ -59,7 +59,7 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
 
 class ReaderListViewSet(viewsets.ModelViewSet):
     """"Представление Читателей."""
-    permission_classes = (permissions.IsAdminUser,)
 
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Readers.objects.all()
     serializer_class = ReaderReputationSerializer

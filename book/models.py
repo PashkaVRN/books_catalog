@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Readers(models.Model):
-    """Модель читателя. Посетителя библиотеки."""
+    """Модель Читателя/Посетителя библиотеки."""
 
     username = models.CharField(
         verbose_name='Username',
