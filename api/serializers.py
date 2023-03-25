@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from book.models import Books, BooksRent, ReaderReputation
+from book.models import Books, BooksRent, ReaderReputation, Readers
 
 
 class UserCreateSerializer(UserCreateSerializer):
@@ -52,3 +52,22 @@ class ReaderReputationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReaderReputation
         fields = ('id', 'reader', 'score')
+
+
+class ReadersSerializer(serializers.ModelSerializer):
+    """Сериализатор Читателя."""
+
+    reputation = ReaderReputationSerializer(many=False, read_only=True)
+    
+    class Meta:
+        model = Readers
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'phone_number', 'reputation')
+
+    # def create(self, validated_data):
+    #     """Создание читателя."""
+
+    #     reputation_data = validated_data.pop('reputation')
+    #     reader = Readers.objects.create(**validated_data)
+    #     ReaderReputation.objects.create(reader=reader, **reputation_data)
+    #     return reader

@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from book.models import Books, BooksRent, Readers
 
-from .serializers import (BooksSerializers, ReaderReputationSerializer,
+from .serializers import (BooksSerializers, ReadersSerializer,
                           UserSerializer)
 
 User = get_user_model()
@@ -62,4 +62,4 @@ class ReaderListViewSet(viewsets.ModelViewSet):
 
     permission_classes = (permissions.IsAdminUser,)
     queryset = Readers.objects.all()
-    serializer_class = ReaderReputationSerializer
+    serializer_class = ReadersSerializer

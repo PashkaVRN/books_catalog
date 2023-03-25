@@ -121,7 +121,7 @@ class ReaderReputation(models.Model):
         verbose_name='Репутация'
     )
     score = models.IntegerField(
-        default=0,
+        default=10,
         verbose_name='Ретинг Читателя'
     )
 
