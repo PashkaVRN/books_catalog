@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Readers(models.Model):
-    """ Модель читателя. Посетителя библиотеки. """
+    """Модель Читателя/Посетителя библиотеки."""
 
     username = models.CharField(
         verbose_name='Username',
@@ -38,7 +38,7 @@ class Readers(models.Model):
 
 
 class Books(models.Model):
-    """ Модель книги. """
+    """Модель книги."""
 
     title = models.CharField(
         verbose_name='Название книги',
@@ -76,7 +76,7 @@ class Books(models.Model):
 
 
 class BooksRent(models.Model):
-    """ Модель выдачи книг. """
+    """Модель выдачи книг."""
 
     book = models.ForeignKey(
         Books,
@@ -103,7 +103,7 @@ class BooksRent(models.Model):
 
     @property
     def is_late(self):
-        """ Проверка возвращена ли книга вовремя(14 дней с момента выдачи). """
+        """Проверка возвращена ли книга вовремя(14 дней с момента выдачи)."""
 
         if not self.return_date:
             return False
@@ -112,7 +112,7 @@ class BooksRent(models.Model):
 
 
 class ReaderReputation(models.Model):
-    """ Модель репутации Читателя. """
+    """Модель репутации Читателя."""
 
     reader = models.OneToOneField(
         Readers,
@@ -121,7 +121,7 @@ class ReaderReputation(models.Model):
         verbose_name='Репутация'
     )
     score = models.IntegerField(
-        default=0,
+        default=10,
         verbose_name='Ретинг Читателя'
     )
 
