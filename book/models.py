@@ -20,12 +20,17 @@ class Readers(models.Model):
         verbose_name='Фамилия читателя',
         max_length=50)
     email = models.EmailField(
+        unique=True,
         verbose_name='email читателя'
     )
     phone_number = PhoneNumberField(
         unique=True,
         null=False,
-        blank=False
+        blank=False,
+    )
+    score = models.IntegerField(
+        default=10,
+        verbose_name='Рейтинг Читателя'
     )
 
     class Meta:
@@ -98,6 +103,10 @@ class BooksRent(models.Model):
         verbose_name='Дата возврата книги',
     )
 
+    class Meta():
+        verbose_name = 'Книга в аренде'
+        verbose_name_plural = 'Книги в аренде'
+
     def __str__(self):
         return f"{self.reader.username} > {self.book.title}"
 
@@ -109,21 +118,3 @@ class BooksRent(models.Model):
             return False
         return (
             self.returned_date > self.rented_at + timezone.timedelta(days=14))
-
-
-class ReaderReputation(models.Model):
-    """Модель репутации Читателя."""
-
-    reader = models.OneToOneField(
-        Readers,
-        on_delete=models.CASCADE,
-        related_name='reputation',
-        verbose_name='Репутация'
-    )
-    score = models.IntegerField(
-        default=10,
-        verbose_name='Ретинг Читателя'
-    )
-
-    def __str__(self):
-        return f"Репутация пользователя {self.reader.username}: ({self.score})"
