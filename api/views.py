@@ -41,7 +41,7 @@ class BooksViewSet(viewsets.ModelViewSet):
         Insert permissions depending on the request.
         """
 
-        if self.request.method in ['POST', 'PUT', 'DELETE']:
+        if self.request.method in ['POST', 'PUT', 'DELETE', 'PATCH']:
             self.permission_classes = [permissions.IsAdminUser]
         else:
             self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]

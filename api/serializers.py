@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from book.models import Books, BooksRent, ReaderReputation, Readers
+from book.models import Books, BooksRent, Readers
 
 
 class UserCreateSerializer(UserCreateSerializer):
@@ -79,31 +79,12 @@ class BooksSerializers(serializers.ModelSerializer):
         )
 
 
-class ReaderReputationSerializer(serializers.ModelSerializer):
-    """Сериализатор репутации Читателя.
-    ||
-    Reader Reputation Serializer.
-    """
-
-    reader = serializers.CharField(source='reader.username', read_only=True)
-
-    class Meta:
-        """Мета параметры модели.
-        ||
-        Model's meta parameters.
-        """
-        model = ReaderReputation
-        fields = ('id', 'reader', 'score')
-
-
 class ReadersSerializer(serializers.ModelSerializer):
     """Reader Serializer.
     ||
     Reader Reputation Serializer.
     """
 
-    reputation = ReaderReputationSerializer(many=False, read_only=True)
-    
     class Meta:
         """Мета параметры модели.
         ||
@@ -111,15 +92,4 @@ class ReadersSerializer(serializers.ModelSerializer):
         """
         model = Readers
         fields = ('username', 'first_name', 'last_name',
-                  'email', 'phone_number', 'reputation')
-
-    # def create(self, validated_data):
-    #     """Метод создания читателя.
-    #     ||
-    #     Reader Creation Method.
-    #     """
-
-    #     reputation_data = validated_data.pop('reputation')
-    #     reader = Readers.objects.create(**validated_data)
-    #     ReaderReputation.objects.create(reader=reader, **reputation_data)
-    #     return reader
+                  'email', 'phone_number', 'score')
