@@ -5,7 +5,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Readers(models.Model):
-    """Модель Читателя/Посетителя библиотеки."""
+    """Модель Читателя/Посетителя библиотеки.
+    ||
+    Library Reader/Visitor Model.
+    """
 
     username = models.CharField(
         verbose_name='Username',
@@ -15,10 +18,12 @@ class Readers(models.Model):
     )
     first_name = models.CharField(
         verbose_name='Имя читателя',
-        max_length=50)
+        max_length=50
+    )
     last_name = models.CharField(
         verbose_name='Фамилия читателя',
-        max_length=50)
+        max_length=50
+    )
     email = models.EmailField(
         unique=True,
         verbose_name='email читателя'
@@ -43,7 +48,10 @@ class Readers(models.Model):
 
 
 class Books(models.Model):
-    """Модель книги."""
+    """Модель книги.
+    ||
+    Books model.
+    """
 
     title = models.CharField(
         verbose_name='Название книги',
@@ -77,11 +85,14 @@ class Books(models.Model):
         verbose_name_plural = 'Книги'
 
     def __str__(self):
+        """String representation method."""
         return self.title
 
 
 class BooksRent(models.Model):
-    """Модель выдачи книг."""
+    """Модель выдачи книг.
+    ||
+    Book lending model."""
 
     book = models.ForeignKey(
         Books,
@@ -112,7 +123,11 @@ class BooksRent(models.Model):
 
     @property
     def is_late(self):
-        """Проверка возвращена ли книга вовремя(14 дней с момента выдачи)."""
+        """Проверка возвращена ли книга вовремя (14 дней с момента выдачи).
+        ||
+        Checking if the book was returned on time
+        (14 days from the date of issue).
+        """
 
         if not self.return_date:
             return False
