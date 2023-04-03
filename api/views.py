@@ -13,14 +13,20 @@ User = get_user_model()
 
 
 class UserViewSet(UserViewSet):
-    """"Представление Пользователя."""
+    """Представление Пользователя.
+    ||
+    User viewset.
+    """
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class BooksViewSet(viewsets.ModelViewSet):
-    """Представление Книг."""
+    """Представление Книг.
+    ||
+    Books viewset.
+    """
 
     queryset = Books.objects.all()
     serializer_class = BooksSerializers
@@ -30,6 +36,9 @@ class BooksViewSet(viewsets.ModelViewSet):
         """
         Переопределение метода get_permissions,
         Вставлять разрешения в зависимости от запроса.
+        ||
+        Redefining the get_permissions method,
+        Insert permissions depending on the request.
         """
 
         if self.request.method in ['POST', 'PUT', 'DELETE']:
@@ -40,12 +49,17 @@ class BooksViewSet(viewsets.ModelViewSet):
 
 
 class RentLateReturnViewSet(viewsets.ModelViewSet):
-    """Аренда/Возврат книги."""
+    """Аренда/Возврат книги.
+    ||
+    Book rental/return viewset.
+    """
 
     permission_classes = (permissions.IsAdminUser,)
 
     def patch(self, request, rent_id):
-        """"Считаем репутацию Читателя."""
+        """"Считаем репутацию Читателя.
+        || 
+        Method counts reader's reputation."""
 
         rent = get_object_or_404(BooksRent, id=rent_id)
         if rent.is_late:
@@ -58,7 +72,10 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
 
 
 class ReaderListViewSet(viewsets.ModelViewSet):
-    """"Представление Читателей."""
+    """Представление Читателей.
+    ||
+    Readers viewset.
+    """
 
     permission_classes = (permissions.IsAdminUser,)
     queryset = Readers.objects.all()

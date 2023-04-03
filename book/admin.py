@@ -4,16 +4,25 @@ from .models import Books, Readers
 
 
 class BooksAdmin(admin.ModelAdmin):
-    """Админ панель управления книгами."""
+    """Админ панель управления книгами.
+    ||
+    Books admin zone.
+    """
 
     list_display = ('title', 'author', 'description', 'genre', 'rented_by')
     search_fields = ('title', 'author', 'genre')
     empty_value_display = '-пусто-'
 
 class ReadersAdmin(admin.ModelAdmin):
-    """Админ панель управления читателями."""
+    """Админ панель управления читателями.
+    ||
+    Readers admin zone.
+    """
 
-    list_display = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'reputation')
+    list_display = (
+        'username', 'first_name', 'last_name',
+        'email', 'phone_number', 'reputation'
+    )
     search_fields = ('username', 'first_name', 'last_name')
     empty_value_display = '-пусто-'
 
