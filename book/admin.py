@@ -4,7 +4,10 @@ from .models import Books, BooksRent, Readers
 
 
 class BooksAdmin(admin.ModelAdmin):
-    """Админ панель управления книгами."""
+    """Админ панель управления книгами.
+    ||
+    Books admin zone.
+    """
 
     list_display = ('title', 'author', 'description', 'genre', 'rented_by')
     search_fields = ('title', 'author', 'genre')
@@ -12,7 +15,10 @@ class BooksAdmin(admin.ModelAdmin):
 
 
 class ReadersAdmin(admin.ModelAdmin):
-    """Админ панель управления читателями."""
+    """Админ панель управления читателями.
+    ||
+    Readers admin zone.
+    """
 
     list_display = ('username', 'first_name', 'last_name', 'email',
                     'phone_number', 'score')
