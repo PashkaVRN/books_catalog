@@ -46,7 +46,7 @@ class BooksSerializers(serializers.ModelSerializer):
 
 class ReadersSerializer(serializers.ModelSerializer):
     """Сериализатор Читателя."""
-    
+
     class Meta:
         model = Readers
         fields = ('username', 'first_name', 'last_name',
