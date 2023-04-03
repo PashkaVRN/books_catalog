@@ -32,7 +32,7 @@ class BooksViewSet(viewsets.ModelViewSet):
         Вставлять разрешения в зависимости от запроса.
         """
 
-        if self.request.method in ['POST', 'PUT', 'DELETE']:
+        if self.request.method in ['POST', 'PUT', 'DELETE', 'PATHС']:
             self.permission_classes = [permissions.IsAdminUser]
         else:
             self.permission_classes = [permissions.IsAuthenticatedOrReadOnly]
