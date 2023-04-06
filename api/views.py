@@ -4,6 +4,7 @@ from djoser.views import UserViewSet
 from rest_framework import permissions, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle
 
 from book.models import Books, BooksRent, Readers
 
@@ -33,6 +34,7 @@ class BooksViewSet(viewsets.ModelViewSet):
     serializer_class = BooksSerializers
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     pagination_class = PageNumberPagination
+    throttle_classes = (AnonRateThrottle,)
 
     def get_permissions(self):
         """

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Books, BooksRent, Readers
+from .models import Books, BooksRent
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -14,16 +14,16 @@ class BooksAdmin(admin.ModelAdmin):
     empty_value_display = 'В наличии'
 
 
-class ReadersAdmin(admin.ModelAdmin):
-    """Админ панель управления читателями.
-    ||
-    Readers admin zone.
-    """
+# class ReadersAdmin(admin.ModelAdmin):
+#     """Админ панель управления читателями.
+#     ||
+#     Readers admin zone.
+#     """
 
-    list_display = ('username', 'first_name', 'last_name', 'email',
-                    'phone_number', 'score')
-    search_fields = ('username', 'first_name', 'last_name')
-    empty_value_display = '-пусто-'
+#     list_display = ('username', 'first_name', 'last_name', 'email',
+#                     'phone_number', 'score')
+#     search_fields = ('username', 'first_name', 'last_name')
+#     empty_value_display = '-пусто-'
 
 
 class BooksRentAdmin(admin.ModelAdmin):
@@ -36,4 +36,4 @@ class BooksRentAdmin(admin.ModelAdmin):
 
 admin.site.register(Books, BooksAdmin)
 admin.site.register(BooksRent, BooksRentAdmin)
-admin.site.register(Readers, ReadersAdmin)
+# admin.site.register(Readers, ReadersAdmin)

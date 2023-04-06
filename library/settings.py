@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'phonenumber_field',
     'api.apps.ApiConfig',
-    'book.apps.BookConfig'
+    'book.apps.BookConfig',
+    'user.apps.UserConfig'
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '10000/day',  # Лимит запросов для UserRateThrottle
+        'anon': '1000/day',   # Лимит для AnonRateThrottle
+    }
 }
 
 # Password validation
@@ -133,3 +141,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'user.Readers'  # Кастомный User
