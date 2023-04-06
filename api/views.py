@@ -2,12 +2,12 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
 from rest_framework import permissions, viewsets
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from book.models import Books, BooksRent, Readers
 
-from .serializers import (BooksSerializers, ReadersSerializer,
-                          UserSerializer)
+from .serializers import BooksSerializers, ReadersSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -20,6 +20,7 @@ class UserViewSet(UserViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    pagination_class = PageNumberPagination
 
 
 class BooksViewSet(viewsets.ModelViewSet):
@@ -31,6 +32,7 @@ class BooksViewSet(viewsets.ModelViewSet):
     queryset = Books.objects.all()
     serializer_class = BooksSerializers
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    pagination_class = PageNumberPagination
 
     def get_permissions(self):
         """
@@ -55,19 +57,20 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
     """
 
     permission_classes = (permissions.IsAdminUser,)
+    pagination_class = PageNumberPagination
 
     def patch(self, request, rent_id):
         """"Считаем репутацию Читателя.
-        || 
+        ||
         Method counts reader's reputation."""
 
         rent = get_object_or_404(BooksRent, id=rent_id)
         if rent.is_late:
-            rent.reader.reputation.score -= 1
-            rent.reader.reputation.save()
+            rent.reader.score -= 1
+            rent.reader.score.save()
         else:
-            rent.reader.reputation.score += 1
-            rent.reader.reputation.save()
+            rent.reader.score += 1
+            rent.reader.score.save()
         return Response({'success': True})
 
 
@@ -80,3 +83,4 @@ class ReaderListViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
     queryset = Readers.objects.all()
     serializer_class = ReadersSerializer
+    pagination_class = PageNumberPagination
