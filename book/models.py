@@ -1,50 +1,7 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils import timezone
-from phonenumber_field.modelfields import PhoneNumberField
 
-
-class Readers(models.Model):
-    """Модель Читателя/Посетителя библиотеки.
-    ||
-    Library Reader/Visitor Model.
-    """
-
-    username = models.CharField(
-        verbose_name='Username',
-        max_length=100,
-        unique=True,
-        validators=(UnicodeUsernameValidator(), )
-    )
-    first_name = models.CharField(
-        verbose_name='Имя читателя',
-        max_length=50
-    )
-    last_name = models.CharField(
-        verbose_name='Фамилия читателя',
-        max_length=50
-    )
-    email = models.EmailField(
-        unique=True,
-        verbose_name='email читателя'
-    )
-    phone_number = PhoneNumberField(
-        unique=True,
-        null=False,
-        blank=False,
-    )
-    score = models.IntegerField(
-        default=10,
-        verbose_name='Рейтинг Читателя'
-    )
-
-    class Meta:
-        ordering = ('username', )
-        verbose_name = 'Читатель'
-        verbose_name_plural = 'Читатели'
-
-    def __str__(self):
-        return self.username
+from user.models import Readers
 
 
 class Books(models.Model):
