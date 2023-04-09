@@ -3,15 +3,80 @@
         "username": "Helga",
         "first_name": "Ольга",
         "last_name": "Перепелова",
-        "email": 
+        "email": "olgaperepel@gmail.com",
+        "phone_number": "+79192467845",
+        "pasword": "607137Qw."
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {}
+    {
+        "username": "Margo",
+        "first_name": "Маргорита",
+        "last_name": "Шевеченко",
+        "email": "margoshevchenko@yandex.ru",
+        "phone_number": "+79050511061",
+        "pasword": "607137Qw."
+    },
+    {
+        "username": "Edi",
+        "first_name": "Эдуард",
+        "last_name": "Шевелев",
+        "email": "edishevelev@yandex.ru",
+        "phone_number": "+79102873447",
+        "pasword": "607137Qw."
+    },
+    {
+        "username": "Olka",
+        "first_name": "Ольга",
+        "last_name": "Липохина",
+        "email": "olkalepekina@mail.ru",
+        "phone_number": "+79808953476",
+        "pasword": "607137Qw."
+    },
+    {
+        "username": "Panika",
+        "first_name": "Мария",
+        "last_name": "Паникина",
+        "email": "mashapani@gmail.com",
+        "phone_number": "+79808953746",
+        "pasword": "607137Qw." 
+    },
+    {
+        "username": "Karman",
+        "first_name": "Андрей",
+        "last_name": "Карманов",
+        "email": "andreykarmanov@gmail.com",
+        "phone_number": "+79108553786",
+        "pasword": "607137Qw."  
+    },
+    {
+        "username": "Shmat",
+        "first_name": "Павел",
+        "last_name": "Шматов",
+        "email": "pavelshmat@gmail.com",
+        "phone_number": "+79058553786",
+        "pasword": "607137Qw."  
+    },
+    {
+        "username": "Denchik",
+        "first_name": "Денис",
+        "last_name": "Завацкий",
+        "email": "deniszavod@mail.ru",
+        "phone_number": "+79513497652",
+        "pasword": "607137Qw."    
+    },
+    {
+        "username": "Lomtik",
+        "first_name": "Владислав",
+        "last_name": "Ломтадзе",
+        "email": "vladlomtadze@yandex.ru",
+        "phone_number": "+79102894692",
+        "pasword": "607137Qw."  
+    },
+    {
+        "username": "Nikrog",
+        "first_name": "Никита",
+        "last_name": "Рогозин",
+        "email": "nikitarogozin@gmail.com",
+        "phone_number": "+79050511271",
+        "pasword": "607137Qw." 
+    }
 ]
