@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from book.models import Books, BooksRent, Readers
+from book.models import Books, BooksRent
+from user.models import Readers
 
 
 class UserCreateSerializer(UserCreateSerializer):
@@ -16,10 +16,10 @@ class UserCreateSerializer(UserCreateSerializer):
         ||
         Model's meta parameters.
         """
-        model = User
+        model = Readers
         fields = (
             'email', 'username', 'first_name',
-            'last_name', 'password'
+            'last_name', 'password', 'phone_number'
         )
 
 
@@ -34,10 +34,10 @@ class UserSerializer(UserSerializer):
         ||
         Model's meta parameters.
         """
-        model = User
+        model = Readers
         fields = (
-             'email', 'id', 'username',
-             'first_name', 'last_name'
+             'email', 'id', 'username', 'score',
+             'first_name', 'last_name', 'phone_number'
         )
 
 

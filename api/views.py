@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
 from rest_framework import permissions, viewsets
@@ -6,11 +5,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
 
-from book.models import Books, BooksRent, Readers
+from book.models import Books, BooksRent
+from user.models import Readers
 
 from .serializers import BooksSerializers, ReadersSerializer, UserSerializer
-
-User = get_user_model()
 
 
 class UserViewSet(UserViewSet):
@@ -19,7 +17,7 @@ class UserViewSet(UserViewSet):
     User viewset.
     """
 
-    queryset = User.objects.all()
+    queryset = Readers.objects.all()
     serializer_class = UserSerializer
     pagination_class = PageNumberPagination
 
