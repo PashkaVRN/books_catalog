@@ -55,14 +55,15 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
     ||
     Book rental/return viewset.
     """
-
+# пересмотреть метод патча
     permission_classes = (permissions.IsAdminUser,)
     pagination_class = PageNumberPagination
 
     def patch(self, request, rent_id):
         """"Считаем репутацию Читателя.
-        ||
-        Method counts reader's reputation."""
+        || 
+        Method counts reader's reputation.
+        """
 
         rent = get_object_or_404(BooksRent, id=rent_id)
         if rent.is_late:
