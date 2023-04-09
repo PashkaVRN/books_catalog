@@ -91,5 +91,7 @@ class ReadersSerializer(serializers.ModelSerializer):
         Model's meta parameters.
         """
         model = Readers
-        fields = ('username', 'first_name', 'last_name',
-                  'email', 'phone_number', 'score')
+        fields = (
+            'username', 'first_name', 'last_name',
+            'email', 'phone_number', 'score'
+        )
