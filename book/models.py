@@ -35,7 +35,7 @@ class Books(models.Model):
     rented_by = models.ForeignKey(
         Readers,
         verbose_name='На руках у ...',
-        help_text='Укажите пользователя у которого книга находиться на руках',
+        help_text='Укажите пользователя, у которого книга находиться на руках',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -98,4 +98,5 @@ class BooksRent(models.Model):
         if not self.return_date:
             return False
         return (
-            self.returned_date > self.rented_at + timezone.timedelta(days=14))
+            self.returned_date > self.rented_at + timezone.timedelta(days=14)
+        )

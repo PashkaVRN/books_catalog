@@ -5,7 +5,7 @@
         "last_name": "Перепелова",
         "email": "olgaperepel@gmail.com",
         "phone_number": "+79192467845",
-        "pasword": "607137Qw."
+        "password": "607137Qw."
     },
     {
         "username": "Margo",
@@ -13,7 +13,7 @@
         "last_name": "Шевеченко",
         "email": "margoshevchenko@yandex.ru",
         "phone_number": "+79050511061",
-        "pasword": "607137Qw."
+        "password": "607137Qw."
     },
     {
         "username": "Edi",
@@ -21,7 +21,7 @@
         "last_name": "Шевелев",
         "email": "edishevelev@yandex.ru",
         "phone_number": "+79102873447",
-        "pasword": "607137Qw."
+        "password": "607137Qw."
     },
     {
         "username": "Olka",
@@ -29,7 +29,7 @@
         "last_name": "Липохина",
         "email": "olkalepekina@mail.ru",
         "phone_number": "+79808953476",
-        "pasword": "607137Qw."
+        "password": "607137Qw."
     },
     {
         "username": "Panika",
@@ -37,7 +37,7 @@
         "last_name": "Паникина",
         "email": "mashapani@gmail.com",
         "phone_number": "+79808953746",
-        "pasword": "607137Qw." 
+        "password": "607137Qw." 
     },
     {
         "username": "Karman",
@@ -45,7 +45,7 @@
         "last_name": "Карманов",
         "email": "andreykarmanov@gmail.com",
         "phone_number": "+79108553786",
-        "pasword": "607137Qw."  
+        "password": "607137Qw."  
     },
     {
         "username": "Shmat",
@@ -53,7 +53,7 @@
         "last_name": "Шматов",
         "email": "pavelshmat@gmail.com",
         "phone_number": "+79058553786",
-        "pasword": "607137Qw."  
+        "password": "607137Qw."  
     },
     {
         "username": "Denchik",
@@ -61,7 +61,7 @@
         "last_name": "Завацкий",
         "email": "deniszavod@mail.ru",
         "phone_number": "+79513497652",
-        "pasword": "607137Qw."    
+        "password": "607137Qw."    
     },
     {
         "username": "Lomtik",
@@ -69,7 +69,7 @@
         "last_name": "Ломтадзе",
         "email": "vladlomtadze@yandex.ru",
         "phone_number": "+79102894692",
-        "pasword": "607137Qw."  
+        "password": "607137Qw."  
     },
     {
         "username": "Nikrog",
@@ -77,6 +77,86 @@
         "last_name": "Рогозин",
         "email": "nikitarogozin@gmail.com",
         "phone_number": "+79050511271",
-        "pasword": "607137Qw." 
+        "password": "607137Qw." 
+    },
+    {
+        "username": "MarkK",
+        "first_name": "Марк",
+        "last_name": "Корчагин",
+        "email": "MarkK@yandex.ru",
+        "phone_number": "+971545146047",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "ZakcharA",
+        "first_name": "Александр",
+        "last_name": "Захаров",
+        "email": "ZakcharA@yandex.ru",
+        "phone_number": "+971545146048",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Xilor",
+        "first_name": "Дарья",
+        "last_name": "Лазарева",
+        "email": "Xilor@yandex.ru",
+        "phone_number": "+971545146049",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Deisano",
+        "first_name": "Олег",
+        "last_name": "Михайлов",
+        "email": "Deisano@yandex.ru",
+        "phone_number": "+971545146050",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Oseli",
+        "first_name": "Александр",
+        "last_name": "Николаев",
+        "email": "Oseli@yandex.ru",
+        "phone_number": "+971545146051",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Trisare",
+        "first_name": "Алексей",
+        "last_name": "Кондратьев",
+        "email": "Trisare@yandex.ru",
+        "phone_number": "+971545146052",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Ceflicus",
+        "first_name": "Тимур",
+        "last_name": "Сергеев",
+        "email": "Ceflicus@yandex.ru",
+        "phone_number": "+971545146053",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Deroriore",
+        "first_name": "Алина",
+        "last_name": "Терентьева",
+        "email": "Deroriore@yandex.ru",
+        "phone_number": "+971545146054",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Maylo",
+        "first_name": "Мария",
+        "last_name": "Морозова",
+        "email": "Maylo@yandex.ru",
+        "phone_number": "+971545146055",
+        "password": "607137Qw."  
+    },
+    {
+        "username": "Fatty",
+        "first_name": "Диана",
+        "last_name": "Максимова",
+        "email": "Fatty@yandex.ru",
+        "phone_number": "+971545146056",
+        "password": "607137Qw."  
     }
 ]
