@@ -6,7 +6,7 @@
 Проект разрабатывается в разных ветках Git.
 ```
 Pavel's_tasks - Ветка основного разработчика, Backend.
-Kseniya's_task - Ветка второго разроботчика, Backend.
+Kseniya's_task - Ветка второго разработчика, Backend.
 test_merge - тестовая объединенная ветка Pavel's_tasks и Kseniya's_task.
 master - стабильная ветка проекта.
 ```
