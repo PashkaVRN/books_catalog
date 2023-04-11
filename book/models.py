@@ -43,7 +43,8 @@ class Books(models.Model):
     )
 
     class Meta():
-        verbose_name = 'Книга'
+        ordering = ('title',)
+        verbose_name = 'Книгу'
         verbose_name_plural = 'Книги'
 
     def __str__(self):
@@ -81,8 +82,9 @@ class BooksRent(models.Model):
     )
 
     class Meta():
+        ordering = ('reader',)
         verbose_name = 'Книга в аренде'
-        verbose_name_plural = 'Книги в аренде'
+        verbose_name_plural = 'Книг в аренде'
 
     def __str__(self):
         return f"{self.reader.username} > {self.book.title}"
