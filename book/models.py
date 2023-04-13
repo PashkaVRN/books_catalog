@@ -100,5 +100,5 @@ class BooksRent(models.Model):
         if not self.return_date:
             return False
         return (
-            self.returned_date > self.rented_at + timezone.timedelta(days=14)
+            self.returned_date > self.rented_at + timezone.timedelta(days=1)
         )
