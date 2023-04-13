@@ -11,6 +11,6 @@ class ReadersAdmin(admin.ModelAdmin):
     """
 
     list_display = ('username', 'first_name', 'last_name', 'email',
-                    'phone_number', 'score')
+                    'phone_number', 'score', 'id')
     search_fields = ('username', 'first_name', 'last_name')
     empty_value_display = '-пусто-'

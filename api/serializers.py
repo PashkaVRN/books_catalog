@@ -19,7 +19,7 @@ class UserCreateSerializer(UserCreateSerializer):
         model = Readers
         fields = (
             'email', 'username', 'first_name',
-            'last_name', 'password', 'phone_number'
+            'last_name', 'password', 'phone_number', 'id'
         )
 
 
@@ -76,22 +76,4 @@ class BooksSerializers(serializers.ModelSerializer):
         fields = (
             'id', 'title', 'author', 'description',
             'genre', 'rented_by', 'rents'
-        )
-
-
-class ReadersSerializer(serializers.ModelSerializer):
-    """Reader Serializer.
-    ||
-    Reader Reputation Serializer.
-    """
-
-    class Meta:
-        """Мета параметры модели.
-        ||
-        Model's meta parameters.
-        """
-        model = Readers
-        fields = (
-            'username', 'first_name', 'last_name',
-            'email', 'phone_number', 'score'
         )
