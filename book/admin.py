@@ -19,6 +19,6 @@ class BooksAdmin(admin.ModelAdmin):
 class BooksRentAdmin(admin.ModelAdmin):
     """Админ панель выдачи книг читателям."""
 
-    list_display = ('book', 'reader', 'rented_at', 'returned_date')
+    list_display = ('book', 'reader', 'rented_at', 'returned_at')
     search_fields = ('book', 'reader')
     empty_value_display = '-пусто-'
