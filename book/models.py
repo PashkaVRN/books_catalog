@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 from user.models import Readers
 
@@ -61,44 +60,50 @@ class BooksRent(models.Model):
         Books,
         verbose_name='Книга',
         help_text='Укажите Книгу',
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='rents'
     )
     reader = models.ForeignKey(
         Readers,
         verbose_name='Читатель',
         help_text='Укажите Читателя',
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True
     )
     rented_at = models.DateTimeField(
-        auto_now_add=True,
         verbose_name='Дата выдачи книги',
-        help_text='Укажите дату выдачи книги читателю'
+        help_text='Укажите дату выдачи книги читателю',
+        # auto_now_add=True
     )
-    returned_date = models.DateField(
+    returned_at = models.DateTimeField(
         null=True,
         blank=True,
         verbose_name='Дата возврата книги',
-        help_text='Укажите дату возврата книги читателем'
+        help_text='Укажите дату возврата книги читателем',
     )
 
     class Meta():
         ordering = ('reader',)
-        verbose_name = 'Книга в аренде'
-        verbose_name_plural = 'Книг в аренде'
+        verbose_name = 'Книгу в аренде'
+        verbose_name_plural = 'Книги в аренде'
 
     def __str__(self):
         return f"{self.reader.username} > {self.book.title}"
 
-    @property
     def is_late(self):
-        """Проверка возвращена ли книга вовремя (14 дней с момента выдачи).
-        ||
-        Checking if the book was returned on time
-        (14 days from the date of issue).
-        """
-
-        if not self.return_date:
+        if not self.returned_at:
             return False
-        return (
-            self.returned_date > self.rented_at + timezone.timedelta(days=1)
-        )
+        rental_duration = self.returned_at - self.rented_at
+        return rental_duration.days > 10
+
+    def save(self, *args, **kwargs):
+        # проверяем, возвращена ли книга вовремя
+        if self.returned_at:
+            is_returned_on_time = self.is_late()
+            if is_returned_on_time:
+                self.reader.reputation += 1
+            else:
+                self.reader.reputation -= 1
+
+        super().save(*args, **kwargs)

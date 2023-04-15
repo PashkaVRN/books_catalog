@@ -45,7 +45,7 @@ class Readers(AbstractUser):
         null=False,
         blank=False,
     )
-    score = models.IntegerField(
+    reputation = models.IntegerField(
         default=10,
         verbose_name='Рейтинг Читателя'
     )
