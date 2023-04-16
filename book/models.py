@@ -89,7 +89,7 @@ class BooksRent(models.Model):
         verbose_name_plural = 'Книги в аренде'
 
     def __str__(self):
-        return f"{self.reader.username} > {self.book.title}"
+        return f"{self.reader.username} взял {self.book.title}"
 
     def is_late(self):
         if not self.returned_at:
@@ -101,9 +101,9 @@ class BooksRent(models.Model):
         # проверяем, возвращена ли книга вовремя
         if self.returned_at:
             is_returned_on_time = self.is_late()
-            if is_returned_on_time:
-                self.reader.reputation += 1
-            else:
-                self.reader.reputation -= 1
-
+        if is_returned_on_time:
+            self.reader.reputation -= 1
+        else:
+            self.reader.reputation += 1
+        self.reader.save()
         super().save(*args, **kwargs)
