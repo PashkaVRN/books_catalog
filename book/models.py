@@ -102,8 +102,8 @@ class BooksRent(models.Model):
         if self.returned_at:
             is_returned_on_time = self.is_late()
         if is_returned_on_time:
-            self.reader.reputation += 1
-        else:
             self.reader.reputation -= 1
+        else:
+            self.reader.reputation += 1
         self.reader.save()
         super().save(*args, **kwargs)
