@@ -55,7 +55,7 @@ class BooksRentSerializer(serializers.ModelSerializer):
         model = BooksRent
         fields = (
             'id', 'book', 'reader', 'rented_at',
-            'returned_at', 'is_late'
+            'fact_returned_at'
         )
 
 
