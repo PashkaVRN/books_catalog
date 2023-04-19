@@ -10,7 +10,8 @@ class BooksAdmin(admin.ModelAdmin):
     Books admin zone.
     """
 
-    list_display = ('title', 'author', 'description', 'genre', 'rented_by')
+    list_display = ('title', 'author', 'description',
+                    'genre', 'rented_by', 'id')
     search_fields = ('title', 'author', 'genre')
     empty_value_display = 'В наличии'
 
@@ -19,6 +20,7 @@ class BooksAdmin(admin.ModelAdmin):
 class BooksRentAdmin(admin.ModelAdmin):
     """Админ панель выдачи книг читателям."""
 
-    list_display = ('book', 'reader', 'rented_at', 'returned_at')
+    list_display = ('book', 'reader', 'rented_at',
+                    'fixed_returned_at', 'fact_returned_at')
     search_fields = ('book', 'reader')
     empty_value_display = '-пусто-'
