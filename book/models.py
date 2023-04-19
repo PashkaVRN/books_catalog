@@ -47,7 +47,6 @@ class Books(models.Model):
         verbose_name_plural = 'Книги'
 
     def __str__(self):
-        """String representation method."""
         return self.title
 
 
@@ -74,13 +73,19 @@ class BooksRent(models.Model):
     rented_at = models.DateTimeField(
         verbose_name='Дата выдачи книги',
         help_text='Укажите дату выдачи книги читателю',
-        # auto_now_add=True
+        auto_now_add=True
     )
-    returned_at = models.DateTimeField(
+    fixed_returned_at = models.DateTimeField(
         null=True,
         blank=True,
-        verbose_name='Дата возврата книги',
-        help_text='Укажите дату возврата книги читателем',
+        verbose_name='Фиксированная дата возврата книги',
+        help_text='Укажите фиксированную дату возврата книги читателем',
+    )
+    fact_returned_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name='Фактическая дата возврата книги',
+        help_text='Укажите фактическую дату возврата книги читателем'
     )
 
     class Meta():
@@ -92,18 +97,33 @@ class BooksRent(models.Model):
         return f"{self.reader.username} взял {self.book.title}"
 
     def is_late(self):
-        if not self.returned_at:
+        """Проверка возврата книги до фиксированной даты пользователем. """
+
+        if not self.fixed_returned_at or not self.rented_at:
             return False
-        rental_duration = self.returned_at - self.rented_at
+        returned_at = self.fact_returned_at or self.fixed_returned_at
+        rental_duration = returned_at - self.rented_at
+        # указываем фиксированное количество дней аренды
         return rental_duration.days > 10
 
-    def save(self, *args, **kwargs):
-        # проверяем, возвращена ли книга вовремя
-        if self.returned_at:
+    def count_user_reputation(self, *args, **kwargs):
+        """Подсчет репутации пользователя
+           в зависимости от фактической даты возврата книги.
+         """
+
+        if self.fixed_returned_at:
             is_returned_on_time = self.is_late()
-        if is_returned_on_time:
-            self.reader.reputation -= 1
-        else:
-            self.reader.reputation += 1
+            # если дата фактического возврата задана
+            # и равна или раньше фиксированной, начисляем +1 репутацию
+            if (self.fact_returned_at and
+                    self.fact_returned_at <= self.fixed_returned_at):
+                self.reader.reputation += 1
+            # если дата фактического возврата еще не задана
+            # и срок возврата просрочен, уменьшаем репутацию
+            elif not self.fact_returned_at and is_returned_on_time:
+                self.reader.reputation -= 1
+            elif (self.fact_returned_at and
+                    self.fact_returned_at > self.fixed_returned_at):
+                self.reader.reputation -= 1
         self.reader.save()
         super().save(*args, **kwargs)
