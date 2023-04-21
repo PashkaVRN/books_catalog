@@ -36,7 +36,7 @@ class UserSerializer(UserSerializer):
         """
         model = Readers
         fields = (
-             'email', 'id', 'username', 'score',
+             'email', 'id', 'username', 'reputation',
              'first_name', 'last_name', 'phone_number'
         )
 
