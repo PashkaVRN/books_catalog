@@ -83,12 +83,14 @@ class Readers(AbstractUser):
 
 
 class DeletedReaders(models.Model):
+    """Модель в которую попадают пользователи после удаления их профиля. """
+
     username = models.CharField(
         verbose_name='Username',
         max_length=100,
         unique=True,
         validators=(UnicodeUsernameValidator(), ),
-        help_text='Введите username упользователя'
+        help_text='Введите username пользователя'
     )
     first_name = models.CharField(
         verbose_name='Имя читателя',
@@ -114,7 +116,8 @@ class DeletedReaders(models.Model):
         verbose_name='Рейтинг Читателя'
     )
     deleted_at = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
+        verbose_name='Дата удаления профиля.'
     )
 
     class Meta:

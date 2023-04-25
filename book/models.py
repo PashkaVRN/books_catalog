@@ -40,9 +40,13 @@ class Books(models.Model):
         blank=True,
         related_name='rented_books'
     )
+    is_available = models.BooleanField(
+        default=True,
+        verbose_name='Доступна'
+    )
 
     class Meta():
-        ordering = ('title',)
+        ordering = ('title', )
         verbose_name = 'Книгу'
         verbose_name_plural = 'Книги'
 
@@ -61,14 +65,13 @@ class BooksRent(models.Model):
         help_text='Укажите Книгу',
         on_delete=models.SET_NULL,
         null=True,
-        related_name='rents'
     )
     reader = models.ForeignKey(
         Readers,
         verbose_name='Читатель',
         help_text='Укажите Читателя',
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
     )
     rented_at = models.DateTimeField(
         verbose_name='Дата выдачи книги',
@@ -89,7 +92,7 @@ class BooksRent(models.Model):
     )
 
     class Meta():
-        ordering = ('reader',)
+        ordering = ('fixed_returned_at', )
         verbose_name = 'Книгу в аренде'
         verbose_name_plural = 'Книги в аренде'
 
@@ -127,3 +130,38 @@ class BooksRent(models.Model):
                 self.reader.reputation -= 1
         self.reader.save()
         super().save(*args, **kwargs)
+
+
+class BookReserved(models.Model):
+    """Модель бронирования книг пользователем. """
+
+    book = models.ForeignKey(
+        Books,
+        verbose_name='Книга',
+        help_text='Выберите книгу для бронирования',
+        related_name='reservations',
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    reader = models.ForeignKey(
+        Readers,
+        verbose_name='Читатель',
+        help_text='Укажите читателя который бронирует книгу',
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    reserved_from = models.DateField(
+        verbose_name='Дата бронирования'
+    )
+    is_active = models.BooleanField(
+        verbose_name='Статус бронирования Активно/Нет',
+        default=True
+    )
+
+    class Meta():
+        ordering = ('reserved_from', )
+        verbose_name = 'Забронированные книги'
+        verbose_name_plural = 'Забронированные книги'
+
+    def __str__(self):
+        return f"{self.reader.username} забронировал {self.book.title}"

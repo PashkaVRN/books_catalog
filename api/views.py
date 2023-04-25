@@ -4,11 +4,12 @@ from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.throttling import AnonRateThrottle
 
-from book.models import Books, BooksRent
+from book.models import BookReserved, Books, BooksRent
 from user.models import Readers
 
 from .permissions import IsAdminModeratorOrSuperUser, IsAdminOrReadOnly
-from .serializers import BooksRentSerializer, BooksSerializers, UserSerializer
+from .serializers import (BookReservedSerialier, BooksRentSerializer,
+                          BooksSerializers, UserSerializer)
 
 
 class UserViewSet(UserViewSet):
@@ -64,3 +65,10 @@ class RentLateReturnViewSet(viewsets.ModelViewSet):
         if not request.user.is_superuser and not request.user.is_staff:
             raise PermissionDenied
         return super().list(request)
+
+
+class BookReservedViewSet(viewsets.ModelViewSet):
+    """Бронировании книги Читателем. """
+
+    queryset = BookReserved.objects.all()
+    serializer_class = BookReservedSerialier

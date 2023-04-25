@@ -1,8 +1,22 @@
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from book.models import Books, BooksRent
+from book.models import BookReserved, Books, BooksRent
 from user.models import Readers
+
+
+class BooksSerializers(serializers.ModelSerializer):
+    """Сериализатор вывода Книг.
+    ||
+    Books output serializer.
+    """
+
+    class Meta:
+        model = Books
+        fields = (
+            'id', 'title', 'author', 'description',
+            'genre', 'rented_by', 'is_available'
+        )
 
 
 class UserCreateSerializer(UserCreateSerializer):
@@ -46,6 +60,8 @@ class BooksRentSerializer(serializers.ModelSerializer):
     ||
     Book Lease Serializer.
     """
+    book = BooksSerializers(read_only=True)
+    reader = serializers.StringRelatedField()
 
     class Meta:
         """Мета параметры модели.
@@ -54,26 +70,26 @@ class BooksRentSerializer(serializers.ModelSerializer):
         """
         model = BooksRent
         fields = (
-            'id', 'book', 'reader', 'rented_at',
-            'fact_returned_at'
+            'id', 'book', 'reader', 'rented_at', 'fact_returned_at'
         )
 
 
-class BooksSerializers(serializers.ModelSerializer):
-    """Сериализатор вывода Книг.
-    ||
-    Books output serializer.
-    """
+class BookReservedSerialier(serializers.ModelSerializer):
+    """Сериализатор бронирования книги. """
 
-    rents = BooksRentSerializer(many=True, read_only=True)
+    # reserved_from = serializers.DateTimeField(format='%d.%m.%Y')
 
     class Meta:
-        """Мета параметры модели.
-        ||
-        Model's meta parameters.
-        """
-        model = Books
+        model = BookReserved
         fields = (
-            'id', 'title', 'author', 'description',
-            'genre', 'rented_by', 'rents'
+            'id', 'book', 'reader', 'reserved_from', 'is_active'
         )
+
+    # def to_representation(self, instance):
+    #     # конвертируем дату строку формата "гггг-мм-ддТчч:мм:сс+HH:MM" в объект datetime
+    #     reserved_from = datetime.fromisoformat(instance.reserved_from)
+    #     # вызываем родительский метод to_representation для выполнения базовой сериализации данных
+    #     data = super().to_representation(instance)
+    #     # форматируем дату в заданный формат
+    #     data['reserved_from'] = reserved_from.strftime('%d.%m.%Y')
+    #     return data
