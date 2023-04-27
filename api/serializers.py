@@ -60,8 +60,8 @@ class BooksRentSerializer(serializers.ModelSerializer):
     ||
     Book Lease Serializer.
     """
-    book = BooksSerializers(read_only=True)
-    reader = serializers.StringRelatedField()
+    # book = BooksSerializers(read_only=True)
+    # reader = serializers.StringRelatedField()
 
     class Meta:
         """Мета параметры модели.
@@ -84,12 +84,3 @@ class BookReservedSerialier(serializers.ModelSerializer):
         fields = (
             'id', 'book', 'reader', 'reserved_from', 'is_active'
         )
-
-    # def to_representation(self, instance):
-    #     # конвертируем дату строку формата "гггг-мм-ддТчч:мм:сс+HH:MM" в объект datetime
-    #     reserved_from = datetime.fromisoformat(instance.reserved_from)
-    #     # вызываем родительский метод to_representation для выполнения базовой сериализации данных
-    #     data = super().to_representation(instance)
-    #     # форматируем дату в заданный формат
-    #     data['reserved_from'] = reserved_from.strftime('%d.%m.%Y')
-    #     return data

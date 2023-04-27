@@ -73,18 +73,19 @@ class BooksRent(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
-    rented_at = models.DateTimeField(
+    rented_at = models.DateField(
         verbose_name='Дата выдачи книги',
         help_text='Укажите дату выдачи книги читателю',
-        auto_now_add=True
+        null=True,
+        blank=True,
     )
-    fixed_returned_at = models.DateTimeField(
+    fixed_returned_at = models.DateField(
         null=True,
         blank=True,
         verbose_name='Фиксированная дата возврата книги',
         help_text='Укажите фиксированную дату возврата книги читателем',
     )
-    fact_returned_at = models.DateTimeField(
+    fact_returned_at = models.DateField(
         null=True,
         blank=True,
         verbose_name='Фактическая дата возврата книги',
@@ -109,10 +110,10 @@ class BooksRent(models.Model):
         # указываем фиксированное количество дней аренды
         return rental_duration.days > 10
 
-    def count_user_reputation(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         """Подсчет репутации пользователя
            в зависимости от фактической даты возврата книги.
-         """
+        """
 
         if self.fixed_returned_at:
             is_returned_on_time = self.is_late()
