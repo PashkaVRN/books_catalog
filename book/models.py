@@ -1,6 +1,7 @@
 from django.db import models
 
 from user.models import Readers
+from django.conf import settings
 
 
 class Books(models.Model):
@@ -108,7 +109,7 @@ class BooksRent(models.Model):
         returned_at = self.fact_returned_at or self.fixed_returned_at
         rental_duration = returned_at - self.rented_at
         # указываем фиксированное количество дней аренды
-        return rental_duration.days > 10
+        return rental_duration.days > settings.FIX_DAYS_RETURN
 
     def save(self, *args, **kwargs):
         """Подсчет репутации пользователя
