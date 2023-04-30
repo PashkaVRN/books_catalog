@@ -158,3 +158,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'user.Readers'  # Кастомный User
+
+# Указываем фиксированное количество дней после аренды книги, до возврата
+FIX_DAYS_RETURN = 10
