@@ -60,8 +60,6 @@ class BooksRentSerializer(serializers.ModelSerializer):
     ||
     Book Lease Serializer.
     """
-    # book = BooksSerializers(read_only=True)
-    # reader = serializers.StringRelatedField()
 
     class Meta:
         """Мета параметры модели.
@@ -76,8 +74,6 @@ class BooksRentSerializer(serializers.ModelSerializer):
 
 class BookReservedSerialier(serializers.ModelSerializer):
     """Сериализатор бронирования книги. """
-
-    # reserved_from = serializers.DateTimeField(format='%d.%m.%Y')
 
     class Meta:
         model = BookReserved
